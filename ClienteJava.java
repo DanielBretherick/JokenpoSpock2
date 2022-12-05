@@ -14,7 +14,7 @@ public class ClienteJava {
 
     public static int heuristica(){
         Random out = new Random();
-        return out.nextInt(5);
+        return 3;
     }
     public static int checkWin(int a,int b){
         if (a==b)
