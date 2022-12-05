@@ -17,7 +17,6 @@ def heuristica():
     result = random.randrange(0,5)
     return result
 
-
 def checkWin(a,b):
     if (a==b):
         return 5
