@@ -1,6 +1,7 @@
 from socket import *
 import random
 from tabulate import tabulate
+from fpdf import FPDF 
 
 actions = ['Rock', 'Paper', 'Scissor', 'Lizard', 'Spock', 'Draw']
 HOST, PORT = "127.0.0.1", 40000
@@ -58,6 +59,16 @@ def checkWin(a,b):
         return a
     if( b == 3 and a == 4):
         return a
+
+def savePDF(lista):
+    pdf = FPDF() 
+    pdf.add_page() 
+    pdf.set_font("Arial", size = 15) 
+    pdf.cell(200, 10, txt = "Jogadas",  
+         ln = 1, align = 'C') 
+    pdf.cell(40, 10, txt = lista, 
+         ln = 2, align = 'C') 
+    pdf.output("jogadas.pdf") 
     
 def printGameStatus(listPlays):
     print(tabulate(listPlays, headers=["Round","PythonPlayer", "JavaPlayer", "Status"]))
@@ -86,3 +97,5 @@ with socket(AF_INET, SOCK_STREAM) as s:
             printGameStatus(plays)
 
             roundCount = roundCount+1
+        
+        savePDF(''.join(str(x) for x in plays))
